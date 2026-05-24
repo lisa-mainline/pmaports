@@ -1,6 +1,6 @@
-# Maintainer: Jens Reidel <adrian@travitia.xyz>
 # Reference: <https://postmarketos.org/devicepkg>
 
+maintainer="None None <none@none.none>"
 pkgname=firmware-xiaomi-lisa
 pkgver=1
 pkgrel=0

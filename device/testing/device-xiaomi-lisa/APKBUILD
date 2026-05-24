@@ -1,15 +1,16 @@
-# Maintainer: Jens Reidel <adrian@travitia.xyz>
 # Reference: <https://postmarketos.org/devicepkg>
 
+maintainer="None None <none@none.none>"
 pkgname=device-xiaomi-lisa
 pkgdesc="Xiaomi 11 Lite 5G NE / 11 LE"
 pkgver=1
-pkgrel=2
+pkgrel=0
 url="https://postmarketos.org"
 license="MIT"
 arch="aarch64"
 options="!check !archcheck"
 depends="
+	alsa-ucm-conf-qcom-sc7280
 	firmware-xiaomi-lisa-adsp
 	firmware-xiaomi-lisa-cdsp
 	firmware-xiaomi-lisa-gpu
@@ -19,16 +20,24 @@ depends="
 	firmware-xiaomi-lisa-vpu
 	firmware-xiaomi-lisa-wpss
 	firmware-qcom-adreno-a660
+	hexagonrpcd>=0.3.2-r3
+	linux-firmware-ath11k
 	linux-firmware-qca
-	linux-postmarketos-qcom-sc7280
+	linux-xiaomi-lisa
 	make-dynpart-mappings
-	mkbootimg
 	postmarketos-base
-	soc-qcom-sc7280
-	soc-qcom-sc7280-qbootctl
+	soc-qcom
+	soc-qcom-modem
+	soc-qcom-pd-mapper
+	soc-qcom-qbootctl
+	systemd-boot
+	unl0kr-fbforcerefresh
 "
 makedepends="devicepkg-dev"
+install="$pkgname-openrc.post-install $pkgname-openrc.post-upgrade"
+subpackages="$pkgname-openrc"
 source="
+	81-libssc-xiaomi-lisa.rules
 	deviceinfo
 	modules-initfs
 "
@@ -39,9 +48,18 @@ build() {
 
 package() {
 	devicepkg_package $startdir $pkgname
+
+	install -Dm644 "$srcdir"/81-libssc-xiaomi-lisa.rules -t \
+		"$pkgdir"/usr/lib/udev/rules.d
+}
+
+openrc() {
+	default_openrc
+	mkdir -p "$subpkgdir"
 }
 
 sha512sums="
-21e81ef32994068f6718ab298c27c1ab5808260b3c54f2bcd3a63faab772ea602d8473de98e741dfbda70d4853cb2456de2f145213dd5a320a56e68d47354ddd  deviceinfo
+2c16ba75e0077b2b1eaefa4c73b287475505a1aeb291ec29316d41cc094277320f9d2aaabfd91eb1dc0f488ab2d61a94faef16e7afe0f1e226779113761b9a37  81-libssc-xiaomi-lisa.rules
+c5b7f8c32906703321dbb8b82da166548fcd04ca30d9c4d93e2b4a780e067c1d1102b59cf98b410db37bde6004f7e2c1c8f76cf47908d74dec80c97f2a60b86f  deviceinfo
 ffa8d4f3c13f80b9910c313770e8dc6b3ceab7ad74ed5232335a272c78b1b43e2dc200ee516d7d662c1610771c4cd8a046bb52702173dc2a551831a068def4f0  modules-initfs
 "
