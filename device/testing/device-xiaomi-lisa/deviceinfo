@@ -17,7 +17,7 @@ deviceinfo_chassis="handset"
 deviceinfo_external_storage="true"
 
 # Bootloader related
-deviceinfo_flash_method="fastboot"
+deviceinfo_flash_method="none"
 
 deviceinfo_rootfs_image_sector_size="4096"
 deviceinfo_super_partitions="/dev/sda20 /dev/sda20"

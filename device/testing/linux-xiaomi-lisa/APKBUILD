@@ -2,7 +2,7 @@ maintainer="None None <none@none.none>"
 _flavor="xiaomi-lisa"
 pkgname=linux-$_flavor
 pkgver=7.0
-pkgrel=0
+pkgrel=2
 pkgdesc="Mainline Kernel fork for Xiaomi 11 Lite 5G NE / 11 LE"
 arch="aarch64"
 _carch="arm64"
@@ -72,5 +72,5 @@ package() {
 }
 
 sha512sums="
-b46ec10048c8a9da9bd3c6536086c5e3284f56832ba519517ac4115da12141a00cb919beb1c27f40d4fafc744e0834966698b0e1f4ab06546ef634f5009f8d82  7.0-lisa.tar.gz
+a5ba57d35da4c05889df30ff1faec68272b55363b2a1253130fb62930316b4d186eca24235578715f330be097787d6079c9b047074e7908745e642ac71d4717f  7.0-lisa.tar.gz
 "
